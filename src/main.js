@@ -5,6 +5,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+// 引入样式初始化
+import 'normalize.css'
+
 new Vue({
   router,
   store,
