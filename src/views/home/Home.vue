@@ -1,5 +1,7 @@
 <template>
-  <div id="home">home</div>
+  <div id="home">home
+    
+  </div>
 </template>
 
 <script>
@@ -7,7 +9,10 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    console.log(this.$route);
+    
+  },
   mounted() {},
   methods: {}
 };
