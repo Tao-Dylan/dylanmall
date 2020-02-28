@@ -1,9 +1,15 @@
 <template>
-  <div id="eat">eat</div>
+  <div id="eat">
+    <show-loading />
+  </div>
 </template>
 
 <script>
+import ShowLoading from "@/components/loading/ShowLoading";
 export default {
+  components: {
+    ShowLoading
+  },
   data() {
     return {};
   },
