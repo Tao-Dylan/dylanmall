@@ -24,7 +24,7 @@ export default {
 <style scoped lang="less">
 #back_top {
   position: fixed;
-  bottom: 80px;
+  bottom: 150px;
   right: 20px;
   img {
     width: 40px;

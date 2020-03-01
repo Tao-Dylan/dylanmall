@@ -40,4 +40,17 @@ Vue.use(Search);
 import { Divider } from "vant";
 Vue.use(Divider);
 
+// 10. 提交订单栏
+import { SubmitBar } from 'vant';
+Vue.use(SubmitBar);
+
+// 11.复选框
+import { Checkbox, CheckboxGroup } from 'vant';
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+
+// 12. 轻提示
+import { Toast } from 'vant';
+Vue.use(Toast)
+
 

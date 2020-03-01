@@ -62,7 +62,7 @@ export default {
         const todayMenuList = res.data;
         if (todayMenuList.success) {
           this.todayMenuDetail = todayMenuList.data.big_recommend.list;
-          console.log(this.todayMenuDetail);
+          // console.log(this.todayMenuDetail);
         }
       });
     }

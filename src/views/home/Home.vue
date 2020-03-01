@@ -4,6 +4,7 @@
     <search-header />
     <tab-bar class="tab_bar_fixed" ref="tabbar_two" @tabClick="tabClick" v-show="isShowTabFixed" />
     <div class="loading" v-if="!isShowLoading">
+      <!-- 滚动区域 -->
       <scroll
         class="scroll_height"
         ref="scroll"
