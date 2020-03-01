@@ -15,7 +15,7 @@ export default {
   name: "MenuDetail",
   components: {
     Scroll,
-    MenuDetailItem
+    MenuDetailItem  
   },
   props: {
     todayMenuDetail: {
