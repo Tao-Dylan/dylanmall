@@ -1,5 +1,6 @@
 <template>
   <div class="pull_menu_list" @click="touchClick" @touchmove.prevent>
+    <div class="all">全部分类</div>
     <div class="menu_wrapper">
       <div
         class="menu_item"
@@ -46,27 +47,36 @@ export default {
 <style scoped lang="less">
 .pull_menu_list {
   position: fixed;
-  width: 75%;
+  width: 100%;
   top: 96px;
   bottom: 50px;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
+  .all {
+    padding-left: 15px;
+    height: 46px;
+    line-height: 46px;
+    background-color: #fff;
+  }
   .menu_wrapper {
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
     background-color: #fff;
-    border-bottom: 1px solid #f5f5f5;
     .menu_item {
       text-align: center;
-      width: 30%;
+      width: 80px;
       height: 26px;
       line-height: 26px;
-      margin-right: 8px;
       margin-bottom: 10px;
       border-radius: 15px;
       font-size: 12px;
       background-color: #eee;
+    }
+    .menu_item:last-child {
+      align-self: flex-start;
     }
     .active {
       color: #ff0036;
