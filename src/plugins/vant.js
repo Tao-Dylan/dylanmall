@@ -9,25 +9,35 @@ Vue.use(TabbarItem);
 import { Icon } from "vant";
 Vue.use(Icon);
 
-// 轮播图组件
+// 3.轮播图组件
 import { Swipe, SwipeItem } from "vant";
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 
-// Gird 宫格
-import { Grid, GridItem } from 'vant';
+// 4.Gird 宫格
+import { Grid, GridItem } from "vant";
 Vue.use(Grid);
 Vue.use(GridItem);
 
-// 倒计时
-import { CountDown } from 'vant';
+// 5.倒计时
+import { CountDown } from "vant";
 Vue.use(CountDown);
 
-// tab标签页
-import { Tab, Tabs } from 'vant';
+// 6.tab标签页
+import { Tab, Tabs } from "vant";
 Vue.use(Tab);
 Vue.use(Tabs);
 
-// 加载中
-import { Loading } from 'vant';
+// 7.加载中
+import { Loading } from "vant";
 Vue.use(Loading);
+
+// 8.搜索框
+import { Search } from "vant";
+Vue.use(Search);
+
+// 9.分割线
+import { Divider } from "vant";
+Vue.use(Divider);
+
+

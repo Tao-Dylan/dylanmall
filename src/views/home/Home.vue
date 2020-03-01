@@ -161,10 +161,10 @@ export default {
   computed: {
     tabTypeGoods() {
       if (this.currentTabType === 0 || this.currentTabType === 2) {
-        console.log("进来0和2");
+        // console.log("进来0和2");
         return this.tabbarGoodsList;
       } else if (this.currentTabType === 1 || this.currentTabType === 3) {
-        console.log("进来1和3");
+        // console.log("进来1和3");
         return this.flashGoods;
       }
     }

@@ -1,98 +1,132 @@
 <template>
   <div id="category">
-    <scroll class="scroll_height" :scrollY="true">
-      <div class="content">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-        <li>20</li>
-        <li>21</li>
-        <li>22</li>
-        <li>23</li>
-        <li>24</li>
-        <li>25</li>
-        <li>26</li>
-        <li>27</li>
-        <li>28</li>
-        <li>29</li>
-        <li>30</li>
-        <li>31</li>
-        <li>32</li>
-        <li>33</li>
-        <li>34</li>
-        <li>35</li>
-        <li>36</li>
-        <li>37</li>
-        <li>38</li>
-        <li>39</li>
-        <li>40</li>
-        <li>41</li>
-        <li>42</li>
-        <li>43</li>
-        <li>44</li>
-        <li>45</li>
-        <li>46</li>
-        <li>47</li>
-        <li>48</li>
-        <li>49</li>
-        <li>50</li>
-        <li>51</li>
-        <li>52</li>
-        <li>53</li>
-        <li>54</li>
-        <li>55</li>
-        <li>56</li>
-        <li>57</li>
-        <li>58</li>
-        <li>59</li>
+    <!-- 顶部搜索框 -->
+    <div class="search">
+      <div class="search_wrapper">
+        <van-icon class="search_icon" size="18px" name="search" />
+        <span class="search_prompt">输入商品名称</span>
       </div>
-    </scroll>
+    </div>
+    <!-- Loading -->
+    <div class="loading" v-if="!isShowLoading">
+      <div class="category_content">
+        <!-- 左边大菜单栏 -->
+        <left-title :left-titles="leftTitleList" @leftTitleClick="leftTitleClick" />
+        <!-- 右侧数据展示栏 -->
+        <right-content :right-detail-data="rightDetailData" />
+      </div>
+    </div>
+    <show-loading v-else />
   </div>
 </template>
 
 <script>
-import Scroll from "@/components/vuescroll/Scroll";
+// 导入网络请求方法
+import { getCategoryData, getCategoryRightData } from "@/network/category";
+// 导入相关的组件
+import ShowLoading from "@/components/loading/ShowLoading";
+import LeftTitle from "./childComps/LeftTitle";
+import RightContent from "./childComps/RightContent";
 export default {
-  components: {
-    Scroll
-  },
+  name: "Category",
+  components: { ShowLoading, LeftTitle, RightContent },
   data() {
-    return {};
+    return {
+      // 判断左边是否点击
+      flag: false,
+      // 显示loading加载组件
+      isShowLoading: true,
+      // 左边大菜单数据
+      leftTitleList: [],
+      // 右边详细数据
+      rightDetailData: []
+    };
   },
-  created() {},
+  created() {
+    this._initData();
+  },
   mounted() {},
-  methods: {}
+  methods: {
+    // 1. 获取网络数据
+    _initData() {
+      getCategoryData().then(res => {
+        const leftData = res.data;
+        // console.log(res);
+        if (leftData.success) {
+          // 1.1 左边数据
+          this.leftTitleList = leftData.data.cate;
+          // console.log(this.leftTitleList);
+        }
+      });
+      getCategoryRightData("/lk001").then(res => {
+        const rightData = res.data;
+        // console.log(res);
+        if (rightData.success) {
+          // 1.2 获取右边数据
+          this.rightDetailData = rightData.data.cate;
+          this.isShowLoading = false;
+          // console.log(this.rightDetailData);
+        }
+      });
+    },
+    // 2. 监听左边菜单栏的点击，而发送数据请求
+    leftTitleClick(index) {
+      // this.isShowLoading = true;
+      this.flag = true;
+      let param = 0;
+      if (index >= 9) {
+        param = `/lk0${index + 1}`;
+      } else {
+        param = `/lk00${index + 1}`;
+      }
+      getCategoryRightData(param).then(res => {
+        const rightData = res.data;
+        // console.log(res);
+        if (rightData.success) {
+          // 2.2 新获取右边数据
+          this.rightDetailData = rightData.data.cate;
+          // this.isShowLoading = false;
+        }
+      });
+    }
+  }
 };
 </script>
 
 <style scoped lang="less">
 #category {
   height: 100vh;
-  background-color: pink;
   overflow: hidden;
-  .scroll_height {
-    width: 100%;
+  .search {
     position: fixed;
-    top: 0;
-    bottom: 50px;
-    .content {
-
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 8px 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    .search_wrapper {
+      height: 100%;
+      flex: 1;
+      border-radius: 17px;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      .search_prompt {
+        opacity: 0.6;
+        padding-left: 5px;
+      }
+    }
+  }
+  .category_content {
+    margin-top: 50px;
+    display: flex;
+    .right {
+      // width: 75%;
+      background-color: #fff;
     }
   }
 }
