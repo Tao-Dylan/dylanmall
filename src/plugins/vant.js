@@ -53,4 +53,13 @@ Vue.use(CheckboxGroup);
 import { Toast } from 'vant';
 Vue.use(Toast)
 
+// 13. 单元格
+import { Cell, CellGroup } from 'vant';
+Vue.use(Cell);
+Vue.use(CellGroup);
+
+// 14. 标记
+import { Tag } from 'vant';
+Vue.use(Tag);
+
 
