@@ -3,7 +3,6 @@
     <scroll class="scroll_height" :scrollY="true">
       <div class="goods_content">
         <goods-item :goods-item="item" v-for="(item,index) in rightGoods.products" :key="item.id" />
-        <!-- <van-divider :style="{color:'#1989fa'}">文字</van-divider> -->
       </div>
     </scroll>
   </div>

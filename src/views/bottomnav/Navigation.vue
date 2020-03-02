@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { getLocalStore } from "../../config/global";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -21,11 +23,20 @@ export default {
   created() {
     this.initSelectTab(this.$route.name);
   },
-  mounted() {},
+  mounted() {
+    // 挂载玩后获取本地初始化数据
+    this._iniData()
+  },
   methods: {
-    // 初始化页面是现实的tabbar
+    // 扩展mutations的方法
+    ...mapMutations(['INIT_SHOP_CART']),
+    // 1. 初始化页面是现实的tabbar
     initSelectTab(name) {
       this.active = name;
+    },
+    // 2. 初始化本地存储
+    _iniData() {
+      this.INIT_SHOP_CART()
     }
   }
 };

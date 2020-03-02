@@ -9,13 +9,15 @@
         <span class="old_price">{{goodsItem.origin_price|moneyFormat}}</span>
       </div>
     </div>
-    <div class="add_car">
+    <div class="add_car" @click="addToCart(goodsItem)">
       <van-icon size="15px" name="cart-o" />
     </div>
   </div>
 </template>
 
 <script>
+import { Toast } from "vant";
+import { mapMutations } from "vuex";
 export default {
   name: "GoodsListItem",
   props: {
@@ -29,7 +31,14 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+     // 扩展 mutations 方法
+    ...mapMutations(["ADD_TO_CART"]),
+    // 1.添加到购物车
+    addToCart(goods) {
+      this.ADD_TO_CART(goods)
+    }
+  }
 };
 </script>
 

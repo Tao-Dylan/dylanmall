@@ -62,6 +62,8 @@ export default {
         return;
       }
       this.scroll = new BScroll(this.$refs.wrapper, {
+        // 阻止嵌套scroll的click事件冒泡，一般都不需要冒泡
+        stopPropagation: true,
         probeType: this.probeType,
         click: this.click,
         scrollX: this.scrollX,

@@ -15,19 +15,16 @@
       <span class="more">更多</span>
     </div>
     <!-- 抢购商品，横向滚动 -->
-    <my-scroll :scrollX="true">
-      <flash-goods :flash-goods="flashGoods" />
-    </my-scroll>
+    <flash-goods :flash-goods="flashGoods" />
   </div>
 </template>
 
 <script>
-import MyScroll from "@/components/vuescroll/MyScroll";
 import FlashGoods from "./FlashGoods";
+import { Toast } from "vant";
 export default {
   name: "FlashSale",
   components: {
-    MyScroll,
     FlashGoods
   },
   props: {
@@ -48,7 +45,14 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    more() {
+      Toast({
+        message: "敬请期待~",
+        duration: 800
+      });
+    }
+  }
 };
 </script>
 

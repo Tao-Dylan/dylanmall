@@ -1,20 +1,20 @@
 <template>
   <div class="flash_goods">
-    <flash-goods-item
-      v-for="(item,index) in flashGoods"
-      :key="index"
-      :goods-item="item"
-    />
+    <scroll class="scroll_width" :scrollX="true">
+      <div class="scroll_content">
+        <flash-goods-item v-for="(item,index) in flashGoods" :key="index" :goods-item="item" />
+      </div>
+    </scroll>
   </div>
 </template>
 
 <script>
-import MyScroll from "@/components/vuescroll/MyScroll";
+import Scroll from "@/components/vuescroll/Scroll";
 import FlashGoodsItem from "./FlashGoodsItem";
 export default {
   name: "FlashGoods",
   components: {
-    MyScroll,
+    Scroll,
     FlashGoodsItem
   },
   props: {
@@ -35,7 +35,13 @@ export default {
 <style scoped lang="less">
 .flash_goods {
   width: 100%;
-  display: flex;
-  overflow: hidden;
+  .scroll_width {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    .scroll_content {
+      display: inline-block;
+    }
+  }
 }
 </style>
