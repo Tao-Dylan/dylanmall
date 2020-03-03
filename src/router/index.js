@@ -11,11 +11,22 @@ const Eat = () => import("@/views/eat/Eat");
 const Cart = () => import("@/views/cart/Cart");
 const Profile = () => import("@/views/profile/Profile");
 
+/**
+ * 订单相关页面组件
+ */
+const MyCenter = () => import("@/views/profile/childComps/myCenter/MyCenter");
+const ChangeNickName = () => import("@/views/profile/childComps/myCenter/ChangeNickName");
+
+/**
+ * 订单相关页面组件
+ */
 const Order = () => import("@/views/order/Order");
 const MyAddress = () => import("@/views/order/childComps/MyAddress");
 const AddAddress = () => import("@/views/order/childComps/AddAddress");
 const EditAddress = () => import("@/views/order/childComps/EditAddress");
-
+/**
+ * 登录组件
+ */
 const Login = () => import("@/views/login/Login");
 
 Vue.use(VueRouter);
@@ -62,7 +73,21 @@ const routes = [
       {
         path: "profile",
         name: "profile",
-        component: Profile
+        component: Profile,
+        children: [
+          {
+            path: "myCenter",
+            name: "myCenter",
+            component: MyCenter,
+            children:[
+              {
+                path:'changeNickName',
+                name:'changeNickName',
+                component:ChangeNickName
+              }
+            ]
+          }
+        ]
       }
     ]
   },

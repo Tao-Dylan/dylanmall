@@ -6,7 +6,7 @@
     <van-cell class="info" center is-link>
       <template slot="title">
         <!-- 登录状态 -->
-        <div v-if="userInfo.token" class="profile_info" @click="goToMyCenter">
+        <div v-show="userInfo.token" class="profile_info" @click="goToMyCenter">
           <div class="author_img">
             <img src="@/images/mine/mine.jpg" alt />
           </div>
@@ -57,13 +57,17 @@
     <!-- 客服，意见-->
     <van-cell title="联系客服" icon="phone" value="客服时间 07:00-22:00" is-link></van-cell>
     <van-cell title="意见反馈" icon="comment-circle" is-link></van-cell>
+    <!--路由的出口-->
+    <transition name="router-slider" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 export default {
-  data() {   
+  data() {
     return {
       orderData: [
         { icon: "cart-circle-o", title: "待支付" },
@@ -73,15 +77,15 @@ export default {
       ]
     };
   },
-  computed:{
-    ...mapState(['userInfo'])
+  computed: {
+    ...mapState(["userInfo"])
   },
   created() {},
   mounted() {},
   methods: {
     // 1. 到个人中心页面
-    goToMyCenter(){
-      // this.$router.push({name:''})
+    goToMyCenter() {
+      this.$router.push({ name: "myCenter" });
     }
   }
 };
@@ -116,7 +120,7 @@ export default {
       .person_info {
         padding-left: 10px;
         color: #fff;
-        a{
+        a {
           color: #fff;
         }
       }
@@ -126,5 +130,16 @@ export default {
 .van-cell__left-icon {
   color: #ff0036;
   font-size: 18px;
+}
+/*转场动画*/
+.router-slider-enter-active,
+.router-slider-leave-active {
+  transition: all 0.3s;
+}
+
+.router-slider-enter,
+.router-slider-leave-active {
+  transform: translate3d(2rem, 0, 0);
+  opacity: 0;
 }
 </style>

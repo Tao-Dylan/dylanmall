@@ -98,5 +98,13 @@ import { Field } from "vant";
 Vue.use(Field);
 
 // 23. 按钮
-import { Button } from 'vant';
+import { Button } from "vant";
 Vue.use(Button);
+
+// 24. 弹出层
+import { Popup } from "vant";
+Vue.use(Popup);
+
+// 25. 时间选择
+import { DatetimePicker } from "vant";
+Vue.use(DatetimePicker);

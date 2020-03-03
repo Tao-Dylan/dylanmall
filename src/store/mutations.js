@@ -6,11 +6,18 @@ import {
   SELECT_SINGLE_GOODS,
   SELECT_ALL_GOODS,
   USER_INFO,
-  INIT_UESR_INFO
+  INIT_USER_INFO,
+  CHANGE_USER_NICK_NAME,
+  USER_INFO_BRITHDAY,
+  LOGIN_OUT
 } from "./mutation_types";
 import Vue from "vue";
 // 导入本地存储
-import { getLocalStore, setLocalStore } from "../config/global";
+import {
+  getLocalStore,
+  setLocalStore,
+  removeLocalStore
+} from "../config/global";
 import { Toast, Dialog } from "vant";
 
 export default {
@@ -140,11 +147,55 @@ export default {
     setLocalStore("userInfo", state.userInfo);
   },
   // 8. 初始化获取本地用户信息
-  [INIT_UESR_INFO](state) {
+  [INIT_USER_INFO](state) {
     // 取出本地用户信息
     let initUserInfo = getLocalStore("userInfo");
     if (initUserInfo) {
-      state.userInfo = initUserInfo;
+      state.userInfo = JSON.parse(initUserInfo);
     }
+  },
+  // 9. 修改用户昵称
+  [CHANGE_USER_NICK_NAME](state, { nickName }) {
+    // 9.1 获取个人信息
+    let userInfo = state.userInfo;
+    // 9.2 取出suer_name替换传过来的值
+    Object.keys(userInfo).forEach((key, index) => {
+      if (key == "user_name") {
+        userInfo["user_name"] = nickName;
+      }
+    });
+    // 9.3 同步state数据
+    state.userInfo = {
+      ...userInfo
+    };
+    // 9.4 将数据更新到本地
+    setLocalStore("userInfo", state.userInfo);
+  },
+  // 10. 用户生日
+  [USER_INFO_BRITHDAY](state, { brithday }) {
+    // 10.1 取出state中的用户信息
+    let userInfo = state.userInfo;
+    // 10.2 遍历userInfo的value值
+    Object.values(userInfo).forEach((info, index) => {
+      // 10.3 判断是否有brithday
+      if (info.brithday) {
+        info.brithday = brithday;
+      } else {
+        Vue.set(userInfo, "brithday", brithday);
+      }
+    });
+    // 10.4 同步state数据
+    state.userInfo = {
+      ...userInfo
+    };
+    // 10.5 将数据更新到本地
+    setLocalStore("userInfo", state.userInfo);
+  },
+  // 11. 退出登录
+  [LOGIN_OUT](state) {
+    state.userInfo = {};
+    state.shopCart = {};
+    removeLocalStore("userInfo");
+    removeLocalStore("shopCart");
   }
 };

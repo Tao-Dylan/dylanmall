@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     // 扩展mutations的方法
-    ...mapMutations(['INIT_SHOP_CART']),
+    ...mapMutations(['INIT_SHOP_CART','INIT_USER_INFO']),
     // 1. 初始化页面是现实的tabbar
     initSelectTab(name) {
       this.active = name;
@@ -37,6 +37,7 @@ export default {
     // 2. 初始化本地存储
     _iniData() {
       this.INIT_SHOP_CART()
+      this.INIT_USER_INFO()
     }
   }
 };

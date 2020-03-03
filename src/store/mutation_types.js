@@ -17,6 +17,14 @@ export const SELECTED_GOODS = "SELECTED_GOODS";
 // 9. 减少商品
 export const REDUCE_GOODS = "REDUCE_GOODS";
 // 10. 用户信息
-export const USER_INFO = 'USER_INFO'
+export const USER_INFO = "USER_INFO";
 // 11. 初始化用户信息
-export const INIT_USER_INFO = 'INIT_USER_INFO'
+export const INIT_USER_INFO = "INIT_USER_INFO";
+// 12. 修改用户昵称
+export const CHANGE_USER_NICK_NAME = "CHANGE_USER_NICK_NAME";
+// 13.用户生日
+export const USER_INFO_BRITHDAY = "USER_INFO_BRITHDAY";
+// 14.退出登录
+export const LOGIN_OUT = "LOGIN_OUT";
+// 15.初始化用户收货地址
+export const INIT_USER_SHOPPING_ADDRESS = "INIT_USER_SHOPPING_ADDRESS";

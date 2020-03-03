@@ -3,7 +3,7 @@
     <van-nav-bar title="个人资料" :fixed="true" left-arrow @click-left="onClickLeft" />
     <div class="icon">
       <span class="title">头像</span>
-      <img src="./../../../images/mine/defaultImg.jpeg" alt />
+      <img src="@/images/mine/mine.jpg" alt />
     </div>
     <van-cell-group>
       <van-cell title="昵称" is-link :value="userInfo.user_name" @click="goToChangeNickName" />
@@ -15,8 +15,8 @@
       />
       <van-cell title="手机号" :value="phoneNumber" />
     </van-cell-group>
-
     <van-button size="large" style="margin-top:1rem" @click="logOut">退出登录</van-button>
+    <!-- 事件选择 -->
     <van-popup v-model="showDateTimePopView" round position="bottom">
       <van-datetime-picker
         v-model="currentDate"
@@ -46,7 +46,7 @@ export default {
       currentDate: new Date("1989/01/01"),
       // 最小时间
       minDate: new Date("1949/01/01"),
-      maxDate: new Date("2020/12/31")
+      maxDate: new Date("2029/12/31")
     };
   },
   computed: {
@@ -59,23 +59,23 @@ export default {
   mounted() {},
   methods: {
     ...mapMutations(["LOGIN_OUT", "USER_INFO_BRITHDAY"]),
-    // 返回上一页
+    // 1. 返回上一页
     onClickLeft() {
       this.$router.back();
     },
-    // 修改昵称
+    // 2. 修改昵称
     goToChangeNickName() {
       this.$router.push({
         name: "changeNickName",
         params: { nickName: this.userInfo.user_name }
       });
     },
-    // 编辑生日信息
-    selectBrithday() {},
-    // 退出登录按钮
-    logOut() {},
-    // 格式化时间
-    formatter() {
+    // 3. 编辑生日信息
+    selectBrithday() {
+      this.showDateTimePopView = true;
+    },
+    // 4. 格式化时间
+    formatter(type, value) {
       if (type === "year") {
         return `${value}年`;
       } else if (type === "month") {
@@ -85,7 +85,7 @@ export default {
       }
       return value;
     },
-    // DateTime pcikView 确定
+    // 5. DateTime pcikView 确定
     confirm(value) {
       let brithday = Moment(value).format("YYYY年MM月DD日");
       this.brithdayText = brithday;
@@ -96,18 +96,16 @@ export default {
         duration: 800
       });
     },
-    // DateTimt pickView 取消
+    // 6. DateTimt pickView 取消
     cancel() {
       this.showDateTimePopView = false;
     },
-    // 退出登录
+    // 7. 退出登录
     logOut() {
-      console.log("退出登录");
       Dialog.confirm({
         message: "确定退出登录吗?"
       })
         .then(() => {
-          // on confirm
           this.LOGIN_OUT();
           Toast({
             message: "退出成功",
@@ -115,9 +113,7 @@ export default {
           });
           this.$router.back();
         })
-        .catch(() => {
-          // on cancel
-        });
+        .catch(() => {});
     }
   }
 };
@@ -131,7 +127,7 @@ export default {
   left: 0;
   bottom: 0;
   background-color: #f5f5f5;
-  z-index: 999;
+  z-index: 2;
   .icon {
     margin-top: 50px;
     display: flex;
