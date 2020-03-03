@@ -4,7 +4,9 @@ import {
   ADD_TO_CART,
   INIT_SHOP_CART,
   SELECT_SINGLE_GOODS,
-  SELECT_ALL_GOODS
+  SELECT_ALL_GOODS,
+  USER_INFO,
+  INIT_UESR_INFO
 } from "./mutation_types";
 import Vue from "vue";
 // 导入本地存储
@@ -129,5 +131,20 @@ export default {
     state.shopCart = { ...shopCart };
     // 5.4 并且本地存储跟新后的数据
     setLocalStore("shopCart", state.shopCart);
+  },
+  // 7. 保存用户信息到本地存储
+  [USER_INFO](state, { userInfo }) {
+    // 7.1 保存外界传来的用户信息
+    state.userInfo = userInfo;
+    // 7.2 本地存储该信息
+    setLocalStore("userInfo", state.userInfo);
+  },
+  // 8. 初始化获取本地用户信息
+  [INIT_UESR_INFO](state) {
+    // 取出本地用户信息
+    let initUserInfo = getLocalStore("userInfo");
+    if (initUserInfo) {
+      state.userInfo = initUserInfo;
+    }
   }
 };

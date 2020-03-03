@@ -16,6 +16,8 @@ const MyAddress = () => import("@/views/order/childComps/MyAddress");
 const AddAddress = () => import("@/views/order/childComps/AddAddress");
 const EditAddress = () => import("@/views/order/childComps/EditAddress");
 
+const Login = () => import("@/views/login/Login");
+
 Vue.use(VueRouter);
 
 // 解决多次点击重复路由报错
@@ -87,6 +89,11 @@ const routes = [
         ]
       }
     ]
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ];
 

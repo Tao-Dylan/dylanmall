@@ -16,3 +16,7 @@ export const SELECTED_GOODS_PRICE = "SELECTED_GOODS_PRICE";
 export const SELECTED_GOODS = "SELECTED_GOODS";
 // 9. 减少商品
 export const REDUCE_GOODS = "REDUCE_GOODS";
+// 10. 用户信息
+export const USER_INFO = 'USER_INFO'
+// 11. 初始化用户信息
+export const INIT_USER_INFO = 'INIT_USER_INFO'

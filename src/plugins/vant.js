@@ -92,3 +92,11 @@ Vue.use(AddressList);
 // 21. 地址编辑
 import { AddressEdit } from "vant";
 Vue.use(AddressEdit);
+
+// 22. Field输入框
+import { Field } from "vant";
+Vue.use(Field);
+
+// 23. 按钮
+import { Button } from 'vant';
+Vue.use(Button);
