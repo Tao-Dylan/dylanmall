@@ -12,13 +12,14 @@
         @scroll="scroll"
       >
         <div class="scroll_content">
-          <!-- 购物车没有内容 -->
-          <div class="cart_empty">
+          <!-- 购物车没有商品 -->
+          <div class="cart_empty" v-if="!showEmptyCar">
             <img src="~@/images/cart/empty.png" alt />
             <p class="title">购物车空空如也</p>
             <div class="go_shoping">去逛逛</div>
           </div>
-          <!-- 购物车内容 -->
+          <!-- 购物车有商品 -->
+          <cart-goods class="goods_list" v-else />
           <!-- 猜你喜欢分割线 -->
           <van-divider :style="{ color: '#000', borderColor: '#bbb', padding: '0 10px' }">
             <van-icon name="like" style="padding:0 5px" color="red" />猜你喜欢
@@ -30,7 +31,12 @@
     </div>
     <show-loading v-else />
     <!-- 提交订单 -->
-    <van-submit-bar class="bottom_submit" :price="0" button-text="提交订单" @submit="onSubmit">
+    <van-submit-bar
+      class="bottom_submit"
+      :price="totalPrice"
+      :button-text="`结算(${selectedGoods.length})`"
+      @submit="onSubmit"
+    >
       <van-checkbox v-model="isSelectedSAll">全选</van-checkbox>
     </van-submit-bar>
     <!-- 返回顶部按钮 -->
@@ -41,22 +47,25 @@
 <script>
 // 导入网络请求方法
 import { getGuessYouLike } from "@/network/cart";
-// 导入滚动组件
+import { mapState, mapGetters, mapMutations } from "vuex";
+// 导入公共组件
 import Scroll from "@/components/vuescroll/Scroll";
-// 导入相关的组件
 import ShowLoading from "@/components/loading/ShowLoading";
 import BackTop from "@/components/backtop/BackTop";
-import CartHeader from "./childComps/CartHeader";
 import GoodsList from "@/views/home/childComps/tabbar/GoodsList";
+// 导入业务组件
+import CartHeader from "./childComps/CartHeader";
+import CartGoods from "./childComps/CartGoods";
 
 export default {
   name: "Cart",
   components: {
     Scroll,
     BackTop,
+    GoodsList,
     ShowLoading,
     CartHeader,
-    GoodsList
+    CartGoods
   },
   data() {
     return {
@@ -65,15 +74,44 @@ export default {
       // 显示加载中
       isShowLoading: true,
       // 商品列表数据
-      goodsList: [],
-      isSelectedSAll: false
+      goodsList: []
     };
   },
   created() {
     this._initData();
   },
+  computed: {
+    // 扩展vuex中的数据
+    ...mapState(["shopCart"]),
+    ...mapGetters({
+      totalPrice: "SELECTED_GOODS_PRICE",
+      selectedGoods: "SELECTED_GOODS"
+    }),
+    // 1. 判断购物车是否有商品
+    showEmptyCar() {
+      const flag = Object.keys(this.shopCart).length;
+      return flag;
+    },
+    // 2. 是否全选商品
+    isSelectedSAll: {
+      get() {
+        const shopCart = this.shopCart;
+        const flag = Object.values(shopCart).every(
+          (goods, index) => goods.checked
+        );
+        return flag;
+      },
+      set(value) {
+        console.log(value);
+        const isSelectedSAll = value;
+        this.SELECT_ALL_GOODS({ isSelectedSAll });
+      }
+    }
+  },
   mounted() {},
   methods: {
+    // 扩展vuex中的方法
+    ...mapMutations(["SELECT_ALL_GOODS"]),
     // 1. 初始化网络请求数据
     _initData() {
       getGuessYouLike().then(res => {
@@ -90,7 +128,6 @@ export default {
     },
     // 2. 监听滚动
     scroll(pos) {
-      // console.log(-pos.y);
       this.showBackTop = -pos.y > 500 ? true : false;
     },
     // 3. 监听返回顶部
@@ -99,8 +136,7 @@ export default {
     },
     // 4. 提交定按钮
     onSubmit() {
-     this.$toast('提交订单')
-      
+      this.$router.push("/order");
     }
   }
 };
@@ -108,15 +144,20 @@ export default {
 
 <style scoped lang="less">
 #cart {
+  position: relative;
   width: 100%;
   .scroll_height {
-    position: fixed;
+    position: absolute;
     top: 50px;
     left: 0;
     right: 0;
-    bottom: 100px;
+    height: calc(100vh - 150px);
+    // padding-bottom: 150px;
     overflow: hidden;
     .scroll_content {
+      .goods_list {
+        padding: 10px;
+      }
       .cart_empty {
         display: flex;
         align-items: center;

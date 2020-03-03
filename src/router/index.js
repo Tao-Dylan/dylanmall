@@ -11,6 +11,11 @@ const Eat = () => import("@/views/eat/Eat");
 const Cart = () => import("@/views/cart/Cart");
 const Profile = () => import("@/views/profile/Profile");
 
+const Order = () => import("@/views/order/Order");
+const MyAddress = () => import("@/views/order/childComps/MyAddress");
+const AddAddress = () => import("@/views/order/childComps/AddAddress");
+const EditAddress = () => import("@/views/order/childComps/EditAddress");
+
 Vue.use(VueRouter);
 
 // 解决多次点击重复路由报错
@@ -56,6 +61,30 @@ const routes = [
         path: "profile",
         name: "profile",
         component: Profile
+      }
+    ]
+  },
+  {
+    path: "/order",
+    name: "order",
+    component: Order,
+    children: [
+      {
+        path: "myAddress",
+        name: "myAddress",
+        component: MyAddress,
+        children: [
+          {
+            path: "addAddress",
+            name: "addAddress",
+            component: AddAddress
+          },
+          {
+            path: "editAddress",
+            name: "editAddress",
+            component: EditAddress
+          }
+        ]
       }
     ]
   }

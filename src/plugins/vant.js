@@ -41,25 +41,54 @@ import { Divider } from "vant";
 Vue.use(Divider);
 
 // 10. 提交订单栏
-import { SubmitBar } from 'vant';
+import { SubmitBar } from "vant";
 Vue.use(SubmitBar);
 
 // 11.复选框
-import { Checkbox, CheckboxGroup } from 'vant';
+import { Checkbox, CheckboxGroup } from "vant";
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 
 // 12. 轻提示
-import { Toast } from 'vant';
-Vue.use(Toast)
+import { Toast } from "vant";
+Vue.use(Toast);
 
 // 13. 单元格
-import { Cell, CellGroup } from 'vant';
+import { Cell, CellGroup } from "vant";
 Vue.use(Cell);
 Vue.use(CellGroup);
 
 // 14. 标记
-import { Tag } from 'vant';
+import { Tag } from "vant";
 Vue.use(Tag);
 
+// 15. 导航栏
+import { NavBar } from "vant";
+Vue.use(NavBar);
 
+// 16. contact联系人
+import { ContactCard, ContactList, ContactEdit } from "vant";
+Vue.use(ContactCard);
+Vue.use(ContactList);
+Vue.use(ContactEdit);
+
+// 17. switch开关
+import { Switch } from "vant";
+Vue.use(Switch);
+
+// 18. 遮盖层
+import { Overlay } from "vant";
+Vue.use(Overlay);
+
+// 19. Radio单选框
+import { RadioGroup, Radio } from "vant";
+Vue.use(Radio);
+Vue.use(RadioGroup);
+
+// 20. 地址列表
+import { AddressList } from "vant";
+Vue.use(AddressList);
+
+// 21. 地址编辑
+import { AddressEdit } from "vant";
+Vue.use(AddressEdit);

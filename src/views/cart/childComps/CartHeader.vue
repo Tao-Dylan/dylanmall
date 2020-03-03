@@ -18,7 +18,10 @@ export default {
 
 <style scoped lang="less">
 .cart_header{
-  position: relative;
+  position:fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 50px;
   display: flex;
   align-items: center;

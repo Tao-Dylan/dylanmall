@@ -1,6 +1,6 @@
 <template>
   <div class="flash_goods">
-    <scroll class="scroll_width" :scrollX="true">
+    <scroll class="scroll_width" :scrollX="true" >
       <div class="scroll_content">
         <flash-goods-item v-for="(item,index) in flashGoods" :key="index" :goods-item="item" />
       </div>

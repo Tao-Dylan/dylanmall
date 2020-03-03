@@ -48,6 +48,10 @@ export default {
     refreshDelay: {
       type: Number, // scroll刷新时间
       default: 20
+    },
+    eventPassthrough: {
+      type: String,
+      default: ""
     }
   },
   mounted() {
@@ -64,6 +68,8 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {
         // 阻止嵌套scroll的click事件冒泡，一般都不需要冒泡
         stopPropagation: true,
+        // 嵌套使用时保证横向纵向都能滚动
+        // eventPassthrough:this.eventPassthrough,
         probeType: this.probeType,
         click: this.click,
         scrollX: this.scrollX,
