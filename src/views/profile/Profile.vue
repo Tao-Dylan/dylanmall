@@ -63,7 +63,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  data() {
+  data() {   
     return {
       orderData: [
         { icon: "cart-circle-o", title: "待支付" },
